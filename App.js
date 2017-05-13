@@ -29,7 +29,7 @@ export default class App extends Component {
 
     this.state = {
       tabNames: ['首页','视频','图片','我的'],
-      tabIconNames: ['md-home','md-grid','md-time','md-contact'],
+      tabIconNames: ['md-home','ios-videocam','ios-reverse-camera','ios-contact'],
     };
   }
 
@@ -55,24 +55,14 @@ export default class App extends Component {
           }
         }
         locked={false}
-        initialPage={3}
+        initialPage={0}
         prerenderingSiblingsNumber={1}>
 
-        <View tabLabel="Home" style={styles.center}>
-          <Text >Home</Text>
-        </View>
-
-        <View tabLabel="Video" style={styles.center}>
-          <Text >Video</Text>
-        </View>
-        <View tabLabel="Picture" style={styles.center}>
-          <Text >Picture</Text>
-        </View>
-
-        <View tabLabel="Account" style={styles.center}>
-          <Text >Account</Text>
-
-        </View>
+        <Home tabLabel="home"/>
+        <Video tabLabel="video"/>
+        <Picture tabLabel="picture"/>
+        <Account tabLabel="account"/>
+        
       </ScrollableTabView>
     );
   }

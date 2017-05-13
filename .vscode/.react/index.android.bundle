@@ -47594,7 +47594,7 @@ var App = function (_Component) {
 
     _this.state = {
       tabNames: ['首页', '视频', '图片', '我的'],
-      tabIconNames: ['md-home', 'md-grid', 'md-time', 'md-contact']
+      tabIconNames: ['md-home', 'ios-videocam', 'ios-reverse-camera', 'ios-contact']
     };
     return _this;
   }
@@ -47625,84 +47625,32 @@ var App = function (_Component) {
             console.log('滑动时的位置：' + position);
           },
           locked: false,
-          initialPage: 3,
+          initialPage: 0,
           prerenderingSiblingsNumber: 1, __source: {
             fileName: _jsxFileName,
             lineNumber: 42
           }
         },
-        _react2.default.createElement(
-          _reactNative.View,
-          { tabLabel: 'Home', style: styles.center, __source: {
-              fileName: _jsxFileName,
-              lineNumber: 61
-            }
-          },
-          _react2.default.createElement(
-            _reactNative.Text,
-            {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 62
-              }
-            },
-            'Home'
-          )
-        ),
-        _react2.default.createElement(
-          _reactNative.View,
-          { tabLabel: 'Video', style: styles.center, __source: {
-              fileName: _jsxFileName,
-              lineNumber: 65
-            }
-          },
-          _react2.default.createElement(
-            _reactNative.Text,
-            {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 66
-              }
-            },
-            'Video'
-          )
-        ),
-        _react2.default.createElement(
-          _reactNative.View,
-          { tabLabel: 'Picture', style: styles.center, __source: {
-              fileName: _jsxFileName,
-              lineNumber: 68
-            }
-          },
-          _react2.default.createElement(
-            _reactNative.Text,
-            {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 69
-              }
-            },
-            'Picture'
-          )
-        ),
-        _react2.default.createElement(
-          _reactNative.View,
-          { tabLabel: 'Account', style: styles.center, __source: {
-              fileName: _jsxFileName,
-              lineNumber: 72
-            }
-          },
-          _react2.default.createElement(
-            _reactNative.Text,
-            {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 73
-              }
-            },
-            'Account'
-          )
-        )
+        _react2.default.createElement(_home2.default, { tabLabel: 'home', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 61
+          }
+        }),
+        _react2.default.createElement(_video2.default, { tabLabel: 'video', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 62
+          }
+        }),
+        _react2.default.createElement(_picture2.default, { tabLabel: 'picture', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 63
+          }
+        }),
+        _react2.default.createElement(_account2.default, { tabLabel: 'account', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 64
+          }
+        })
       );
     }
   }]);
@@ -54105,9 +54053,22 @@ var _reactNative = require(45            ); // 45 = react-native
 var Video = function (_Component) {
   babelHelpers.inherits(Video, _Component);
 
-  function Video() {
+  function Video(props) {
     babelHelpers.classCallCheck(this, Video);
-    return babelHelpers.possibleConstructorReturn(this, (Video.__proto__ || Object.getPrototypeOf(Video)).apply(this, arguments));
+
+    var _this = babelHelpers.possibleConstructorReturn(this, (Video.__proto__ || Object.getPrototypeOf(Video)).call(this, props));
+
+    _this.state = {
+      dataSource: new _reactNative.ListView.DataSource({
+        rowHasChanged: function rowHasChanged(row1, row2) {
+          return row1 !== row2;
+        }
+      })
+    };
+    _this.state = {
+      dataSource: _this.state.dataSource.cloneWithRows(['row 1', 'row 2', 'row 3', 'row 4', 'row 5', 'row 6', 'row 7', 'row 8', 'row 9', 'row 10', 'row 11'])
+    };
+    return _this;
   }
 
   babelHelpers.createClass(Video, [{
@@ -54117,18 +54078,46 @@ var Video = function (_Component) {
         _reactNative.View,
         { style: styles.container, __source: {
             fileName: _jsxFileName,
-            lineNumber: 18
+            lineNumber: 45
           }
         },
         _react2.default.createElement(
-          _reactNative.Text,
-          { style: styles.welcome, __source: {
+          _reactNative.View,
+          { style: styles.header, __source: {
               fileName: _jsxFileName,
-              lineNumber: 19
+              lineNumber: 46
             }
           },
-          'Welcome to Video!'
-        )
+          _react2.default.createElement(
+            _reactNative.Text,
+            { style: styles.headerText, __source: {
+                fileName: _jsxFileName,
+                lineNumber: 47
+              }
+            },
+            '\u89C6\u9891\u5217\u8868'
+          )
+        ),
+        _react2.default.createElement(_reactNative.ListView, {
+          dataSource: this.state.dataSource,
+          renderRow: function renderRow(rowData) {
+            return _react2.default.createElement(
+              _reactNative.Text,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 54
+                }
+              },
+              rowData
+            );
+          },
+          style: styles.listView,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 52
+          }
+        })
       );
     }
   }]);
@@ -54141,14 +54130,27 @@ exports.default = Video;
 var styles = _reactNative.StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF'
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10
+  },
+  header: {
+    paddingTop: 25,
+    paddingBottom: 12,
+    backgroundColor: '#FF0000'
+  },
+  headerText: {
+    fontSize: 16,
+    fontWeight: '600',
+    textAlign: 'center',
+    color: '#fff'
+  },
+  listView: {
+    paddingTop: 53,
+    backgroundColor: '#F5FCFF'
   }
 });
 }, 596, null, "RN_TopNews/Component/Video/video.js");
@@ -54331,7 +54333,7 @@ var TabBar = function (_Component) {
     value: function renderTabOption(tab, i) {
       var _this3 = this;
 
-      var color = this.props.activeTab == i ? "#6B8E23" : "#ADADAD";
+      var color = this.props.activeTab == i ? "#FF0000" : "#ADADAD";
       return _react2.default.createElement(
         _reactNative.TouchableOpacity,
         { onPress: function onPress() {
