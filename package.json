@@ -16,7 +16,9 @@
     "babel-jest": "20.0.1",
     "babel-preset-react-native": "1.9.2",
     "jest": "20.0.1",
-    "react-test-renderer": "16.0.0-alpha.6"
+    "react-test-renderer": "16.0.0-alpha.6",
+    "query-string": "^4.3.2",
+    "mockjs": "^1.0.1-beta3"
   },
   "jest": {
     "preset": "react-native"
